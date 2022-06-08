@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "421970538038",
+    "project_id": "blacksteelapp",
+    "storage_bucket": "blacksteelapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421970538038:android:3b50ef416c3e3af3d93297",
+        "android_client_info": {
+          "package_name": "com.example.app_blacksteel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421970538038-a2hrge4vbvltm8ug7e1qmfoc2okbb204.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYM9yL7dami2JJQyBfLBSVrpI5dsgflv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421970538038-a2hrge4vbvltm8ug7e1qmfoc2okbb204.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
