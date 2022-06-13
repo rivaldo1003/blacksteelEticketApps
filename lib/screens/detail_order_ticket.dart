@@ -1,26 +1,104 @@
 import 'package:epfl_blacksteel_manokwari/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DetailOrderTicket extends StatefulWidget {
-  const DetailOrderTicket({Key? key}) : super(key: key);
+  int id;
+  String title;
+  String secondTitle;
+  int price;
+  String day;
+  String date;
+  String location;
+  String ticketCategory;
+  String time;
+  int jumlahTicket;
+  int totalHarga;
+  var codeNumber;
+
+  DetailOrderTicket(
+    this.id,
+    this.title,
+    this.secondTitle,
+    this.price,
+    this.day,
+    this.date,
+    this.location,
+    this.ticketCategory,
+    this.time,
+    this.jumlahTicket,
+    this.totalHarga,
+    this.codeNumber,
+  );
 
   @override
-  State<DetailOrderTicket> createState() => _DetailOrderTicketState();
+  State<DetailOrderTicket> createState() => _DetailOrderTicketState(
+        id,
+        title,
+        secondTitle,
+        price,
+        day,
+        date,
+        location,
+        ticketCategory,
+        time,
+        jumlahTicket,
+        totalHarga,
+        codeNumber,
+      );
 }
 
 class _DetailOrderTicketState extends State<DetailOrderTicket> {
+  int _id;
+  String _title;
+  String _secondTitle;
+  int _price;
+  String _day;
+  String _date;
+  String _location;
+  String _categoryTicket;
+  String _time;
+  int _jumlahTicket;
+  int _totalHarga;
+  var _codeNumber;
+
+  _DetailOrderTicketState(
+    this._id,
+    this._title,
+    this._secondTitle,
+    this._price,
+    this._day,
+    this._date,
+    this._location,
+    this._categoryTicket,
+    this._time,
+    this._jumlahTicket,
+    this._totalHarga,
+    this._codeNumber,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        backgroundColor: redLogo,
-        title: Text(
-          'Detail Riwayat',
-          style: poppinsTextStyle.copyWith(
-            fontWeight: FontWeight.w500,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xffc6161d),
+                Color(0xff901E25),
+              ],
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+            ),
           ),
+        ),
+        title: Text(
+          'Detail Ticket',
+          style: poppinsTextStyle.copyWith(
+              fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
       body: SafeArea(
@@ -29,7 +107,16 @@ class _DetailOrderTicketState extends State<DetailOrderTicket> {
             Container(
               height: 164,
               width: MediaQuery.of(context).size.width,
-              color: redSecond,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xffc6161d),
+                    Color(0xff901E25),
+                  ],
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                ),
+              ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 18, horizontal: 25),
@@ -37,7 +124,7 @@ class _DetailOrderTicketState extends State<DetailOrderTicket> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Kode Pemesanan',
+                    'Kode Order',
                     style: poppinsTextStyle.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.w300,
@@ -48,7 +135,7 @@ class _DetailOrderTicketState extends State<DetailOrderTicket> {
                     height: 6,
                   ),
                   Text(
-                    '7BL57NW',
+                    _codeNumber,
                     style: poppinsTextStyle.copyWith(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -109,41 +196,51 @@ class _DetailOrderTicketState extends State<DetailOrderTicket> {
                         height: 5,
                       ),
                       Text(
-                        'BLACKSTEEL MKW VS HALUS FC JAKARTA',
+                        'Blacksteel Manokwari ' + widget.secondTitle,
                         style: poppinsTextStyle.copyWith(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: 14,
+                          color: textOrder,
                         ),
                       ),
+                      SizedBox(
+                        height: 4,
+                      ),
                       Text(
-                        'VIP',
+                        _categoryTicket,
                         style: poppinsTextStyle.copyWith(
                           fontWeight: FontWeight.w600,
                           fontSize: 14,
-                          color: greyRiwayat,
+                          color: colorGold,
                         ),
                       ),
+                      SizedBox(
+                        height: 4,
+                      ),
                       Text(
-                        'GOR UNY Jogjakarta',
+                        _location,
                         style: poppinsTextStyle.copyWith(
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
                           color: greyRiwayat,
                         ),
                       ),
+                      SizedBox(
+                        height: 4,
+                      ),
                       Text(
-                        '15.00 WIB',
+                        _time,
                         style: poppinsTextStyle.copyWith(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: 14,
                           color: greyRiwayat,
                         ),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 4,
                       ),
                       Text(
-                        'Senin, 15 Juni 2022',
+                        _day + ' ' + _date,
                         style: poppinsTextStyle.copyWith(
                           // fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -167,7 +264,7 @@ class _DetailOrderTicketState extends State<DetailOrderTicket> {
                         ),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 4,
                       ),
                       Container(
                         padding:
@@ -188,40 +285,50 @@ class _DetailOrderTicketState extends State<DetailOrderTicket> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              'BLACKSTEEL MKW VS HALUS FC JAKARTA / VIP',
+                              _title + _secondTitle + ' / ' + _categoryTicket,
                               style: poppinsTextStyle.copyWith(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
                               ),
                             ),
                             SizedBox(
-                              height: 5,
+                              height: 10,
                             ),
                             Text(
-                              'Jumlah x 1',
+                              'Jumlah x ' + _jumlahTicket.toString(),
                               style: poppinsTextStyle.copyWith(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
                                 color: greyRiwayat,
                               ),
                             ),
+                            SizedBox(
+                              height: 2,
+                            ),
                             Divider(
                               height: 1,
                               thickness: 1,
                               color: Colors.grey,
                             ),
+                            SizedBox(
+                              height: 5,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  'Total Harga',
+                                  'TOTAL HARGA',
                                   style: poppinsTextStyle.copyWith(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
                                 ),
                                 Text(
-                                  'Rp. 100,000',
+                                  NumberFormat.currency(
+                                          locale: 'id',
+                                          symbol: 'Rp ',
+                                          decimalDigits: 0)
+                                      .format(_totalHarga),
                                   style: poppinsTextStyle.copyWith(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
@@ -274,14 +381,14 @@ class _DetailOrderTicketState extends State<DetailOrderTicket> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
-                              '1. RIVALDO SIREGAR',
+                              '1. Rivaldo Siregar',
                               style: poppinsTextStyle.copyWith(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
                               ),
                             ),
                             Text(
-                              'VIP',
+                              _categoryTicket,
                               style: poppinsTextStyle.copyWith(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,

@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:epfl_blacksteel_manokwari/screens/detail_order_ticket.dart';
 import 'package:epfl_blacksteel_manokwari/screens/semua_pertandingan.dart';
+import 'package:epfl_blacksteel_manokwari/screens/ticket_all_match.dart';
 import 'package:epfl_blacksteel_manokwari/theme.dart';
 import 'package:epfl_blacksteel_manokwari/widgets/card_ticket.dart';
 
@@ -28,158 +28,203 @@ class _HomePageState extends State<HomePage> {
     CollectionReference products = firebaseFirestore.collection('products');
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: redLogo,
-        elevation: 0,
-        title: Text(
-          'e-PFL Blacksteel Manokwari',
-          style: TextStyle(color: Colors.white),
-        ),
-        leading: Icon(
-          Icons.person_pin,
-          size: 30,
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Icon(
-              Icons.notifications,
-              size: 30,
-            ),
-          ),
-        ],
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              child: CarouselSlider(
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    aspectRatio: 2.0,
-                    enlargeCenterPage: true,
+      // appBar: AppBar(
+      //   backgroundColor: redLogo,
+      //   elevation: 0,
+      //   title: Text(
+      //     'Blacksteel Manokwari',
+      //     style: poppinsTextStyle.copyWith(
+      //       fontWeight: FontWeight.bold,
+      //       fontSize: 18,
+      //     ),
+      //   ),
+      //   flexibleSpace: Container(
+      //     decoration: BoxDecoration(
+      //       gradient: LinearGradient(
+      //         colors: [
+      //           Color(0xffc6161d),
+      //           Color(0xff901E25),
+      //         ],
+      //         begin: Alignment.bottomLeft,
+      //         end: Alignment.topRight,
+      //       ),
+      //     ),
+      //   ),
+      //   actions: [
+      //     Padding(
+      //       padding: const EdgeInsets.all(10),
+      //       child: Row(
+      //         children: [
+      //           Icon(
+      //             Icons.share,
+      //             size: 25,
+      //             color: colorGold,
+      //           ),
+      //           SizedBox(
+      //             width: 15,
+      //           ),
+      //           GestureDetector(
+      //             onTap: (){
+      //               // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      //               //   return CartTicket()
+      //               // }));
+      //             },
+      //             child: Icon(
+      //               Icons.turned_in_sharp,
+      //               size: 25,
+      //               color: colorGold,
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 15,
                   ),
-                  items: imgList
-                      .map((item) => Container(
-                            child: Container(
-                              margin: EdgeInsets.all(5.0),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5.0)),
-                                child: Stack(
-                                  children: <Widget>[
-                                    Image.network(item,
-                                        fit: BoxFit.cover, width: 1000.0),
-                                    Positioned(
-                                      bottom: 0.0,
-                                      left: 0.0,
-                                      right: 0.0,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              Color.fromARGB(200, 0, 0, 0),
-                                              Color.fromARGB(0, 0, 0, 0)
-                                            ],
-                                            begin: Alignment.bottomCenter,
-                                            end: Alignment.topCenter,
+                  Container(
+                    child: CarouselSlider(
+                        options: CarouselOptions(
+                          autoPlay: true,
+                          aspectRatio: 2.5,
+                          enlargeCenterPage: true,
+                        ),
+                        items: imgList
+                            .map((item) => Container(
+                                  child: Container(
+                                    margin: EdgeInsets.all(5.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      child: Stack(
+                                        children: <Widget>[
+                                          Image.network(item,
+                                              fit: BoxFit.cover, width: 1000.0),
+                                          Positioned(
+                                            bottom: 0.0,
+                                            left: 0.0,
+                                            right: 0.0,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Color.fromARGB(
+                                                        200, 0, 0, 0),
+                                                    Color.fromARGB(0, 0, 0, 0)
+                                                  ],
+                                                  begin: Alignment.bottomCenter,
+                                                  end: Alignment.topCenter,
+                                                ),
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 10.0,
+                                                  horizontal: 20.0),
+                                            ),
                                           ),
-                                        ),
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 10.0, horizontal: 20.0),
+                                        ],
                                       ),
                                     ),
-                                  ],
+                                  ),
+                                ))
+                            .toList()),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          'Semua Pertandingan',
+                          style: poppinsTextStyle.copyWith(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return TicketAllMatch();
+                            }));
+                          },
+                          child: Container(
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  'Semua',
+                                  style: poppinsTextStyle.copyWith(
+                                    color: greyRiwayat,
+                                  ),
                                 ),
-                              ),
+                                Icon(
+                                  (Icons.keyboard_arrow_right_outlined),
+                                  color: greyRiwayat,
+                                ),
+                              ],
                             ),
-                          ))
-                      .toList()),
-            ),
-            Container(
-              margin: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'Semua Pertandingan',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return SemuaPertandingan();
-                      }));
-                    },
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5),
                     child: Container(
-                      child: Row(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      height: 280,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
                         children: <Widget>[
-                          Text('Semua'),
-                          Icon(
-                            (Icons.keyboard_arrow_right_outlined),
-                          )
+                          StreamBuilder<QuerySnapshot>(
+                            stream: products
+                                .orderBy('id', descending: false)
+                                .snapshots(),
+                            builder: (_, snapshot) {
+                              if (snapshot.hasData) {
+                                return Row(
+                                  children: (snapshot.data! as QuerySnapshot)
+                                      .docs
+                                      .map(
+                                        (e) => CardTicket(
+                                          id: e['id'],
+                                          image:
+                                              'assets/images/blacksteel_logo.png',
+                                          title: e['title'],
+                                          secondTitle: e['secondTitle'],
+                                          price: e['price'],
+                                          day: e['day'],
+                                          date: e['date'],
+                                          time: e['time'],
+                                          location: e['location'],
+                                          linkLocation: e['linkLocation'],
+                                        ),
+                                      )
+                                      .toList(),
+                                );
+                              } else {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            },
+                          ),
                         ],
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              child: Container(
-                margin: EdgeInsets.symmetric(vertical: 5),
-                height: 280,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    StreamBuilder<QuerySnapshot>(
-                      stream:
-                          products.orderBy('id', descending: false).snapshots(),
-                      builder: (_, snapshot) {
-                        if (snapshot.hasData) {
-                          return Row(
-                            children: (snapshot.data! as QuerySnapshot)
-                                .docs
-                                .map(
-                                  (e) => CardTicket(
-                                    id: e['id'],
-                                    image: 'assets/images/blacksteel_logo.png',
-                                    title: e['title'],
-                                    secondTitle: e['secondTitle'],
-                                    price: e['price'],
-                                    day: e['day'],
-                                    date: e['date'],
-                                    time: e['time'],
-                                    location: e['location'],
-                                    linkLocation: e['linkLocation'],
-                                  ),
-                                )
-                                .toList(),
-                          );
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-
     );
   }
 }

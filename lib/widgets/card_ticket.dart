@@ -1,13 +1,9 @@
 import 'package:epfl_blacksteel_manokwari/screens/detail_screen.dart';
+import 'package:epfl_blacksteel_manokwari/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CardTicket extends StatelessWidget {
-  // final int id;
-  // final String title;
-  // final int price;
-  // final String image;
-
   final int id;
   final String image;
   final String title;
@@ -53,8 +49,9 @@ class CardTicket extends StatelessWidget {
       },
       child: Container(
         width: 160,
+        height: 300,
         child: Card(
-          elevation: 5,
+          elevation: 3,
           child: Wrap(
             children: <Widget>[
               Center(
@@ -64,7 +61,12 @@ class CardTicket extends StatelessWidget {
                 ),
               ),
               ListTile(
-                title: Text(title),
+                title: Text(
+                  title,
+                  style: poppinsTextStyle.copyWith(
+                    fontSize: 16,
+                  ),
+                ),
                 subtitle: Text(
                   NumberFormat.currency(
                           locale: 'id', symbol: 'Rp ', decimalDigits: 0)

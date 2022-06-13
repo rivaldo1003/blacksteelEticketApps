@@ -1,10 +1,12 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epfl_blacksteel_manokwari/models/category.dart';
-import 'package:epfl_blacksteel_manokwari/screens/detail_order_ticket.dart';
-import 'package:epfl_blacksteel_manokwari/screens/order_ticket.dart';
+import 'package:epfl_blacksteel_manokwari/screens/confirm_pay.dart';
 import 'package:epfl_blacksteel_manokwari/theme.dart';
 import 'package:epfl_blacksteel_manokwari/widgets/category_ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:random_string/random_string.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -19,10 +21,18 @@ class DetailScreen extends StatefulWidget {
   String? time;
   String? linkLocation;
 
-  DetailScreen(this.id, this.image, this.title, this.secondTitle, this.price,
-      this.day, this.location, this.date, this.time, this.linkLocation,
-      {Key? key})
-      : super(key: key);
+  DetailScreen(
+    this.id,
+    this.image,
+    this.title,
+    this.secondTitle,
+    this.price,
+    this.day,
+    this.location,
+    this.date,
+    this.time,
+    this.linkLocation,
+  );
 
   @override
   State<DetailScreen> createState() => _DetailScreenState(
@@ -69,10 +79,6 @@ class _DetailScreenState extends State<DetailScreen> {
 
   late int price = _price!;
 
-  bool isRegular = true; // price tetap = 50.000
-  bool isVIP = false; // price tetap + 50.000
-  bool isVVIP = false; // price tetap + 150.000
-
   void _tambah() {
     setState(() {
       i++;
@@ -101,35 +107,95 @@ class _DetailScreenState extends State<DetailScreen> {
     });
   }
 
-  void _clickRegular() {
+  void ticketCategory() {
+    if (isRegular == true) {
+      Text('Regular');
+    } else if (isVIP == true) {
+      Text('VIP');
+    } else if (isVVIP == true) {
+      Text('VVIP');
+    }
+  }
+
+  bool isRegular = true; // price tetap = 50.000
+  bool isVIP = false; // price tetap + 50.000
+  bool isVVIP = false; // price tetap + 150.000
+  String nameTicket = 'Regular';
+
+  void clickRegular() {
     setState(() {
       price = dataPrice * i;
       isRegular = true;
       isVIP = false;
       isVVIP = false;
+      nameTicket = 'Regular';
     });
   }
 
-  void _clickVIP() {
+  void clickVIP() {
     setState(() {
       price = (dataPrice + 50000) * i;
       isRegular = false;
       isVIP = true;
       isVVIP = false;
+      nameTicket = 'VIP';
     });
   }
 
-  void _clickVVIP() {
+  void clickVVIP() {
     setState(() {
       price = (dataPrice + 150000) * i;
       isRegular = false;
       isVIP = false;
       isVVIP = true;
+      nameTicket = 'VVIP';
     });
   }
 
+  // Timer? countdownTimer;
+  // Duration myDuration = Duration(days: 5);
+
+  String codeRandom = randomNumeric(17).toString();
+
   @override
+  // void initState() {
+  //   super.initState();
+  // }
+  //
+  // void startTimer() {
+  //   countdownTimer =
+  //       Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+  // }
+  //
+  // void stopTimer() {
+  //   setState(() => countdownTimer?.cancel());
+  // }
+  //
+  // void resetTimer() {
+  //   stopTimer();
+  //   setState(() => myDuration = Duration(days: 5));
+  // }
+
+  // void setCountDown() {
+  //   final reduceSecondsBy = 1;
+  //   setState(() {
+  //     final seconds = myDuration.inSeconds - reduceSecondsBy;
+  //     if (seconds < 0) {
+  //       countdownTimer!.cancel();
+  //     } else {
+  //       myDuration = Duration(seconds: seconds);
+  //     }
+  //   });
+  // }
+
   Widget build(BuildContext context) {
+
+    // String strDigits(int n) => n.toString().padLeft(2, '0');
+    // final days = strDigits(myDuration.inDays);
+    // Step 7
+    // final hours = strDigits(myDuration.inHours.remainder(3));
+    // final minutes = strDigits(myDuration.inMinutes.remainder(10));
+    // final seconds = strDigits(myDuration.inSeconds.remainder(60));
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -265,7 +331,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         Row(
                           children: <Widget>[
                             Text(
-                              _day.toString(),
+                              _day.toString() + ',',
                               style: poppinsTextStyle.copyWith(
                                 color: greyRiwayat,
                               ),
@@ -320,7 +386,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         Row(
                           children: <Widget>[
                             InkWell(
-                              onTap: _clickRegular,
+                              onTap: clickRegular,
                               child: CategoryTicket(
                                 Category(
                                   id: 1,
@@ -333,7 +399,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               width: 10,
                             ),
                             InkWell(
-                              onTap: _clickVIP,
+                              onTap: clickVIP,
                               child: CategoryTicket(
                                 Category(
                                   id: 2,
@@ -346,13 +412,12 @@ class _DetailScreenState extends State<DetailScreen> {
                               width: 10,
                             ),
                             InkWell(
-                              onTap: _clickVVIP,
+                              onTap: clickVVIP,
                               child: CategoryTicket(
                                 Category(
-                                  id: 3,
-                                  nameCategoryTicket: 'VVIP',
-                                  isActive: isVVIP,
-                                ),
+                                    id: 3,
+                                    nameCategoryTicket: 'VVIP',
+                                    isActive: isVVIP),
                               ),
                             ),
                           ],
@@ -410,8 +475,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             Spacer(),
                             InkWell(
                               onTap: () async {
-                                String url =
-                                   _linkLocation.toString();
+                                String url = _linkLocation.toString();
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -441,8 +505,22 @@ class _DetailScreenState extends State<DetailScreen> {
                               setState(() {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return OrderTicket();
+                                  return ConfirmPay(
+                                    id: _id,
+                                    price: price,
+                                    i: i,
+                                    nameTicket: nameTicket,
+                                    title: _title.toString(),
+                                    secondTitle: _secondTitle.toString(),
+                                    location: _location.toString(),
+                                    day: _day.toString(),
+                                    date: _date.toString(),
+                                    time: _time.toString(),
+                                    dataPrice: dataPrice,
+                                    codeNumber: codeRandom,
+                                  );
                                 }));
+                                codeRandom;
                               });
                             },
                             // onPressed: () async {
