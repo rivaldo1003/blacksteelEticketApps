@@ -1,7 +1,4 @@
-import 'package:epfl_blacksteel_manokwari/screens/bottom_navigation.dart';
-import 'package:epfl_blacksteel_manokwari/screens/home_page.dart';
 import 'package:epfl_blacksteel_manokwari/screens/pay_method.dart';
-import 'package:epfl_blacksteel_manokwari/screens/semua_pertandingan.dart';
 import 'package:epfl_blacksteel_manokwari/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
