@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epfl_blacksteel_manokwari/screens/detail_screen.dart';
 import 'package:epfl_blacksteel_manokwari/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -55,13 +56,26 @@ class _TicketAllMatchState extends State<TicketAllMatch> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    'Hai, BolaLOB !',
-                    style: poppinsTextStyle.copyWith(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  StreamBuilder<User?>(
+                      stream: FirebaseAuth.instance.userChanges(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            'Hai, ${snapshot.data!.email}',
+                            style: poppinsTextStyle.copyWith(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
+                        }
+                        return Text(
+                          'Hai, BolaLOB !',
+                          style: poppinsTextStyle.copyWith(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        );
+                      }),
                   Text(
                     'Selamat datang di ePFL Blacksteel',
                     style: poppinsTextStyle.copyWith(
@@ -86,7 +100,7 @@ class _TicketAllMatchState extends State<TicketAllMatch> {
                   ),
                   StreamBuilder<QuerySnapshot>(
                     stream:
-                    products.orderBy('id', descending: false).snapshots(),
+                        products.orderBy('id', descending: false).snapshots(),
                     builder: (_, snapshot) {
                       if (snapshot.hasData) {
                         return Column(
@@ -94,18 +108,18 @@ class _TicketAllMatchState extends State<TicketAllMatch> {
                               .docs
                               .map(
                                 (e) => buildCardTicket(
-                              id: e['id'],
-                              image: 'assets/images/blacksteel_ticket.png',
-                              title: e['title'],
-                              secondTitle: e['secondTitle'],
-                              price: e['price'],
-                              day: e['day'],
-                              date: e['date'],
-                              time: e['time'],
-                              location: e['location'],
-                              linkLocation: e['linkLocation'],
-                            ),
-                          )
+                                  id: e['id'],
+                                  image: 'assets/images/blacksteel_ticket.png',
+                                  title: e['title'],
+                                  secondTitle: e['secondTitle'],
+                                  price: e['price'],
+                                  day: e['day'],
+                                  date: e['date'],
+                                  time: e['time'],
+                                  location: e['location'],
+                                  linkLocation: e['linkLocation'],
+                                ),
+                              )
                               .toList(),
                         );
                       } else {
@@ -207,7 +221,7 @@ class buildCardTicket extends StatelessWidget {
                     ),
                     Text(
                       NumberFormat.currency(
-                          locale: 'id', symbol: 'Rp ', decimalDigits: 0)
+                              locale: 'id', symbol: 'Rp ', decimalDigits: 0)
                           .format(price),
                       style: poppinsTextStyle.copyWith(
                           fontSize: 14,

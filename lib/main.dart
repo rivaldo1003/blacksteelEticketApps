@@ -1,16 +1,11 @@
-import 'package:epfl_blacksteel_manokwari/models/card_order.dart';
 import 'package:epfl_blacksteel_manokwari/models/ticket_model.dart';
-import 'package:epfl_blacksteel_manokwari/screens/bottom_navigation.dart';
-import 'package:epfl_blacksteel_manokwari/screens/cart_ticket.dart';
 import 'package:epfl_blacksteel_manokwari/screens/home_page.dart';
-import 'package:epfl_blacksteel_manokwari/screens/login_page.dart';
 import 'package:epfl_blacksteel_manokwari/screens/order_ticket.dart';
+import 'package:epfl_blacksteel_manokwari/screens/profile_page.dart';
 import 'package:epfl_blacksteel_manokwari/screens/register_page.dart';
-import 'package:epfl_blacksteel_manokwari/screens/semua_pertandingan.dart';
-import 'package:epfl_blacksteel_manokwari/screens/splash.dart';
+import 'package:epfl_blacksteel_manokwari/screens/tes.dart';
 import 'package:epfl_blacksteel_manokwari/screens/ticket_all_match.dart';
 import 'package:epfl_blacksteel_manokwari/theme.dart';
-import 'package:epfl_blacksteel_manokwari/widgets/countdown.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -92,12 +87,13 @@ class AppTicketState extends State<AppTicket> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                      //   return CartTicket()
-                      // }));
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return ProfilePage();
+                      }));
                     },
                     child: Icon(
-                      Icons.turned_in_sharp,
+                      Icons.person_pin,
                       size: 25,
                       color: colorGold,
                     ),
