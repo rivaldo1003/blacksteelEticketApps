@@ -1,4 +1,5 @@
 import 'package:epfl_blacksteel_manokwari/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -79,6 +80,7 @@ class _DetailOrderTicketState extends State<DetailOrderTicket> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -380,12 +382,20 @@ class _DetailOrderTicketState extends State<DetailOrderTicket> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
-                              '1. Rivaldo Siregar',
-                              style: poppinsTextStyle.copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
+                            StreamBuilder<User?>(
+                              stream: FirebaseAuth.instance.userChanges(),
+                              builder: (context, snapshot) {
+                                if(snapshot.hasData) {
+                                  return Text('1. ${snapshot.data!.email}');
+                                }
+                                return Text(
+                                  '1. Rivaldo Siregar',
+                                  style: poppinsTextStyle.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                );
+                              }
                             ),
                             Text(
                               _categoryTicket,

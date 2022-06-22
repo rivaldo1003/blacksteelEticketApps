@@ -1,5 +1,6 @@
 import 'package:epfl_blacksteel_manokwari/screens/pay_method.dart';
 import 'package:epfl_blacksteel_manokwari/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -324,14 +325,21 @@ class _ConfirmPayState extends State<ConfirmPay> {
                   ),
                   Row(
                     children: <Widget>[
-                      Text(
-                        'Selesaikan Pembayaran Anda',
-                        style: poppinsTextStyle.copyWith(
-                          color: Color(0xffA5A8AD),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                        ),
-                      ),
+                      StreamBuilder<User?>(
+                          stream: FirebaseAuth.instance.userChanges(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text('User : ${snapshot.data!.email}');
+                            }
+                            return Text(
+                              'Selesaikan Pembayaran Anda',
+                              style: poppinsTextStyle.copyWith(
+                                color: Color(0xffA5A8AD),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12,
+                              ),
+                            );
+                          }),
                       // Text(
                       //   ' 06.48',
                       //   style: poppinsTextStyle.copyWith(
@@ -357,6 +365,9 @@ class _ConfirmPayState extends State<ConfirmPay> {
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 1,
             ),
             Container(
               padding: EdgeInsets.symmetric(
@@ -396,9 +407,10 @@ class _ConfirmPayState extends State<ConfirmPay> {
       bottomNavigationBar: Container(
         height: 55,
         width: 375,
-        child: RaisedButton(
-          color: redLogo,
-          textColor: Colors.white,
+        child: ElevatedButton(
+          // color: redLogo,
+          // textColor: Colors.white,
+          style: ElevatedButton.styleFrom(primary: redLogo),
           onPressed: () {
             setState(() {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
@@ -419,11 +431,11 @@ class _ConfirmPayState extends State<ConfirmPay> {
               }));
             });
           },
-          elevation: 0,
-          disabledElevation: 0,
-          focusElevation: 0,
-          highlightElevation: 0,
-          hoverElevation: 0,
+          // elevation: 0,
+          // disabledElevation: 0,
+          // focusElevation: 0,
+          // highlightElevation: 0,
+          // hoverElevation: 0,
           child: Text(
             'BAYAR SEKARANG',
             style: poppinsTextStyle.copyWith(

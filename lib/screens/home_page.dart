@@ -204,6 +204,7 @@ class _HomePageState extends State<HomePage> {
                                           time: e['time'],
                                           location: e['location'],
                                           linkLocation: e['linkLocation'],
+                                          userId: e['userId'],
                                         ),
                                       )
                                       .toList(),

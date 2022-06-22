@@ -94,6 +94,7 @@ flutter:
     - assets/images/ticket_category.png
     - assets/images/logo_bca.png
     - assets/images/logo_dana.png
+    - assets/images/logo_dana_only.png
     - assets/images/logo_dana_fix.png
     - assets/images/logo_tunai.png
     - assets/images/logo_gopay.png
@@ -101,6 +102,9 @@ flutter:
     - assets/images/logo_mandiri.png
     - assets/images/mandiri.png
     - assets/images/logo_login.png
+    - assets/images/aktifkan.png
+    - assets/images/aktif.png
+    - assets/images/topup.png
     - assets/images/successfix.gif
 
   #   - images/a_dot_ham.jpeg

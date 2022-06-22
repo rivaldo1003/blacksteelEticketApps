@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epfl_blacksteel_manokwari/models/category.dart';
 import 'package:epfl_blacksteel_manokwari/screens/confirm_pay.dart';
@@ -20,6 +19,7 @@ class DetailScreen extends StatefulWidget {
   String? location;
   String? time;
   String? linkLocation;
+
 
   DetailScreen(
     this.id,
@@ -46,6 +46,7 @@ class DetailScreen extends StatefulWidget {
         date,
         time,
         linkLocation,
+
       );
 }
 
@@ -61,6 +62,7 @@ class _DetailScreenState extends State<DetailScreen> {
   String? _time;
   String? _linkLocation;
 
+
   _DetailScreenState(
     this._id,
     this._image,
@@ -72,6 +74,7 @@ class _DetailScreenState extends State<DetailScreen> {
     this._location,
     this._time,
     this._linkLocation,
+
   );
 
   int i = 1;
@@ -189,7 +192,6 @@ class _DetailScreenState extends State<DetailScreen> {
   // }
 
   Widget build(BuildContext context) {
-
     // String strDigits(int n) => n.toString().padLeft(2, '0');
     // final days = strDigits(myDuration.inDays);
     // Step 7
@@ -495,12 +497,13 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                         Container(
                           width: MediaQuery.of(context).size.width,
-                          child: RaisedButton(
-                            color: redLogo,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            textColor: Colors.white,
+                          child: ElevatedButton(
+                            // color: redLogo,
+                            style: ElevatedButton.styleFrom(primary: redLogo),
+                            // shape: RoundedRectangleBorder(
+                            //   borderRadius: BorderRadius.circular(20),
+                            // ),
+                            // textColor: Colors.white,
                             onPressed: () {
                               setState(() {
                                 Navigator.of(context)
@@ -532,11 +535,11 @@ class _DetailScreenState extends State<DetailScreen> {
                             //     throw 'Could not launch $url';
                             //   }
                             // },
-                            elevation: 0,
-                            disabledElevation: 0,
-                            focusElevation: 0,
-                            highlightElevation: 0,
-                            hoverElevation: 0,
+                            // elevation: 0,
+                            // disabledElevation: 0,
+                            // focusElevation: 0,
+                            // highlightElevation: 0,
+                            // hoverElevation: 0,
                             child: Text(
                               'Pesan Tiket',
                               style: poppinsTextStyle.copyWith(

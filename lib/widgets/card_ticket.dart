@@ -14,6 +14,7 @@ class CardTicket extends StatelessWidget {
   final String location;
   final String time;
   final String linkLocation;
+  final String userId;
 
   CardTicket({
     required this.id,
@@ -26,6 +27,7 @@ class CardTicket extends StatelessWidget {
     required this.location,
     required this.time,
     required this.linkLocation,
+    required this.userId,
   });
 
   @override

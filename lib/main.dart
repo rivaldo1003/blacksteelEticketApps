@@ -106,7 +106,7 @@ class AppTicketState extends State<AppTicket> {
             tabs: [
               Tab(text: 'Home'),
               Tab(text: 'All Match'),
-              Tab(text: 'Order Tickets'),
+              Tab(text: 'My Tickets'),
             ],
             unselectedLabelColor: Colors.white,
             indicatorColor: colorGold,

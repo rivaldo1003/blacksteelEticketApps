@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:epfl_blacksteel_manokwari/main.dart';
 import 'package:epfl_blacksteel_manokwari/screens/register_page.dart';
 import 'package:epfl_blacksteel_manokwari/theme.dart';
@@ -92,11 +94,19 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.centerRight,
                   child: Padding(
                     padding: EdgeInsets.only(right: 15),
-                    child: Text(
-                      'Lupa Password?',
-                      style: poppinsTextStyle.copyWith(
-                        color: redLogin,
-                        fontWeight: FontWeight.bold,
+                    child: TextButton(
+                      onPressed: () async {
+                        try {
+                          await FirebaseAuth.instance
+                              .sendPasswordResetEmail(email: _email.text);
+                        } on FirebaseAuthException catch (e) {
+                          showNotif(context, e.message.toString());
+                        }
+                      },
+                      child: Text(
+                        'Lupa Password?',
+                        style: poppinsTextStyle.copyWith(
+                            color: redLogin, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -126,13 +136,13 @@ class _LoginPageState extends State<LoginPage> {
                                       email: _email.text,
                                       password: _password.text) ==
                               true) {
-                            Navigator.of(context)
-                                .pushReplacement(MaterialPageRoute(builder: (context) {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) {
                               return AppTicket();
                             }));
                           } else {
-                            Navigator.of(context)
-                                .pushReplacement(MaterialPageRoute(builder: (context) {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) {
                               return AppTicket();
                             }));
                           }

@@ -1,29 +1,16 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epfl_blacksteel_manokwari/models/card_order.dart';
-import 'package:epfl_blacksteel_manokwari/screens/detail_order_ticket.dart';
-import 'package:epfl_blacksteel_manokwari/theme.dart';
 import 'package:epfl_blacksteel_manokwari/widgets/card_order_ticket.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class OrderTicket extends StatelessWidget {
   final cart;
+  String userId = FirebaseAuth.instance.currentUser!.uid;
 
-  const OrderTicket({Key? key, this.cart}) : super(key: key);
-
-  // int price;
-  // int i;
-  // String location;
-  // String date;
-  // var codeNumber;
-  //
-  // OrderTicket({
-  //   required this.price,
-  //   required this.i,
-  //   required this.location,
-  //   required this.date,
-  //   required this.codeNumber,
-  //   required this.cart,
-  // });
+  OrderTicket({Key? key, this.cart}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +23,9 @@ class OrderTicket extends StatelessWidget {
           child: Column(
             children: [
               StreamBuilder<QuerySnapshot>(
-                stream:
-                    ticketOrders.orderBy('id', descending: false).snapshots(),
+                stream: ticketOrders
+                    .orderBy('id', descending: false)
+                    .snapshots(),
                 builder: (_, snapshot) {
                   if (snapshot.hasData) {
                     return Column(

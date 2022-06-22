@@ -87,19 +87,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(
                   height: 8,
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 15),
-                    child: Text(
-                      'Lupa Password?',
-                      style: poppinsTextStyle.copyWith(
-                        color: redLogin,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
                 SizedBox(
                   height: 38,
                 ),

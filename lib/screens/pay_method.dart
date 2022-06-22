@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epfl_blacksteel_manokwari/screens/success.dart';
 import 'package:epfl_blacksteel_manokwari/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -19,7 +20,6 @@ class PayMethod extends StatefulWidget {
   var orderNumber;
 
 
-
   PayMethod({
     required this.id,
     required this.totalBayar,
@@ -33,6 +33,7 @@ class PayMethod extends StatefulWidget {
     required this.time,
     required this.jumlahTicket,
     required this.orderNumber,
+
   });
 
   @override
@@ -210,7 +211,7 @@ class _PayMethodState extends State<PayMethod> {
         onTap: () {
           setState(() {
             ticketOrders.add({
-              'id' : widget.id,
+              'id': widget.id,
               'Nama Pertandingan(Tuan Rumah)': widget.title,
               'Tim Tamu': widget.secondTitle,
               'Tanggal Pertandingan': widget.date,
@@ -222,6 +223,8 @@ class _PayMethodState extends State<PayMethod> {
               'Metode Pambayaran': bayarLabel[value],
               'Total Tagihan': widget.totalBayar,
               'Nomor Order': widget.orderNumber,
+              'User Id': FirebaseAuth.instance.currentUser!.uid,
+              'User Email': FirebaseAuth.instance.currentUser!.email,
             });
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
               return Success();

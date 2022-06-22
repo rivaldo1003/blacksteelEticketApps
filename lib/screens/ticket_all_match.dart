@@ -151,6 +151,7 @@ class buildCardTicket extends StatelessWidget {
   final String time;
   final String linkLocation;
 
+
   const buildCardTicket({
     Key? key,
     required this.image,
