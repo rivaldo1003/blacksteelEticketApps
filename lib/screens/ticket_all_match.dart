@@ -195,8 +195,8 @@ class buildCardTicket extends StatelessWidget {
                   image: AssetImage(
                     image,
                   ),
-                  height: 145,
-                  width: 145,
+                  height: 120,
+                  width: 120,
                 ),
                 SizedBox(
                   width: 13,
