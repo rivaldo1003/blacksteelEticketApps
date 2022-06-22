@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epfl_blacksteel_manokwari/models/card_order.dart';
 import 'package:epfl_blacksteel_manokwari/widgets/card_order_ticket.dart';
@@ -56,7 +54,7 @@ class OrderTicket extends StatelessWidget {
                     );
                   } else {
                     return Center(
-                      child: CircularProgressIndicator(),
+                      child: const CircularProgressIndicator(),
                     );
                   }
                 },

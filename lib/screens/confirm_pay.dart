@@ -375,7 +375,7 @@ class _ConfirmPayState extends State<ConfirmPay> {
                 horizontal: 21,
               ),
               height: 60,
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width,
               color: Colors.grey[200],
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

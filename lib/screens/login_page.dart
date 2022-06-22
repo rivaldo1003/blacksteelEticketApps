@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:epfl_blacksteel_manokwari/main.dart';
 import 'package:epfl_blacksteel_manokwari/screens/register_page.dart';
 import 'package:epfl_blacksteel_manokwari/theme.dart';

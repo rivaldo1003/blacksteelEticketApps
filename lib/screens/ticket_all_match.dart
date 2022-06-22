@@ -188,6 +188,7 @@ class buildCardTicket extends StatelessWidget {
       child: Column(
         children: [
           Container(
+            width: MediaQuery.of(context).size.width,
             child: Row(
               children: <Widget>[
                 Image(
